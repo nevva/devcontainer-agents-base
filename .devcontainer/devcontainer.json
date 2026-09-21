@@ -1,0 +1,24 @@
+{
+  "name": "Claude Lab",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  "features": {
+    // Anthropics officiella feature som installerar Claude Code CLI
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+
+  // Unik volym per container, så inloggningen överlever rebuild
+  // men delas inte med andra devcontainers
+  "mounts": [
+    "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume"
+  ],
+
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+  },
+
+  "remoteUser": "node",
+
+  // Nya volymer ägs av root, så node-användaren behöver äga mappen
+  "postCreateCommand": "sudo chown -R node:node /home/node/.claude"
+}
