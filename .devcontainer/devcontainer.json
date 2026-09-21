@@ -10,15 +10,18 @@
   // Unik volym per container, så inloggningen överlever rebuild
   // men delas inte med andra devcontainers
   "mounts": [
-    "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume"
+    "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume"
   ],
 
   "containerEnv": {
-    "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "CODEX_HOME": "/home/node/.codex"
   },
 
   "remoteUser": "node",
 
-  // Nya volymer ägs av root, så node-användaren behöver äga mappen
-  "postCreateCommand": "sudo chown -R node:node /home/node/.claude"
+  // Nya volymer ägs av root, så node-användaren behöver äga mapparna.
+  // Installerar även OpenAI Codex CLI via npm
+  "postCreateCommand": "sudo chown -R node:node /home/node/.claude /home/node/.codex && npm install -g @openai/codex"
 }
