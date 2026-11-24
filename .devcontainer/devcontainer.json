@@ -3,15 +3,15 @@
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
 
   "features": {
-    // Anthropics officiella feature som installerar Claude Code CLI
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
 
-  // Unik volym per container, så inloggningen överlever rebuild
-  // men delas inte med andra devcontainers
+  // One volume per container: logins survive rebuilds but are not shared with other devcontainers.
   "mounts": [
     "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
-    "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume"
+    "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume",
+    "source=gh-config-${devcontainerId},target=/home/node/.config/gh,type=volume"
   ],
 
   "containerEnv": {
@@ -21,7 +21,5 @@
 
   "remoteUser": "node",
 
-  // Nya volymer ägs av root, så node-användaren behöver äga mapparna.
-  // Installerar även OpenAI Codex CLI via npm
-  "postCreateCommand": "sudo chown -R node:node /home/node/.claude /home/node/.codex && npm install -g @openai/codex"
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
 }
