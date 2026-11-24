@@ -11,5 +11,5 @@
 
 ## GitHub
 
-- `gh` holds a fine-grained token scoped to this repository only; git pushes through it. Push with `git`, open pull requests with `gh pr create`.
+- `gh` holds the GitHub login for this container (a fine-grained token for this repository only, or an OAuth login if `GH_LOGIN=oauth`); git pushes through it. Push with `git`, open pull requests with `gh pr create`.
 - If `gh` reports no login, or a push or API call is refused (401/403), stop and ask the person to log in: `bash .devcontainer/welcome.sh` prints the steps. Don't look for other credentials.
