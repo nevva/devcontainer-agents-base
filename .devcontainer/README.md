@@ -40,13 +40,13 @@ Rebuild the container; the steps then show `gh auth login --web --scopes ...` (o
 
 Trade-off: this token reaches every repo your account can access, and anything in the container (agents included) can use it. Use the default token mode unless you need the extra scopes.
 
-## Optional: let agents use Chrome on your host
+## Add-ons
 
-If Chrome is installed on your host (macOS or Linux) and you want agents in the container to browse, test pages or take screenshots in a real browser, ask your agent:
+Optional features: `chrome-mcp` (agents drive a Chrome on your host) and `korp` (Korp's code index, tasks and decisions for agents). To add some, ask your agent:
 
-> Add the `chrome-mcp` feature from https://github.com/nevva/devcontainer-features to this devcontainer, following `src/chrome-mcp/NOTES.md`.
+> Follow `.devcontainer/ADD-ONS.md`.
 
-It starts a separate agent Chrome on the host, shared by all your containers. Log in to the sites the agent needs in that window once. Works with Claude Code (and Copilot CLI), not Codex.
+It asks which add-ons you want, edits `devcontainer.json`, explains them to future agents in `AGENTS.md`, and lists what you still need to do yourself.
 
 ## Good to know
 
