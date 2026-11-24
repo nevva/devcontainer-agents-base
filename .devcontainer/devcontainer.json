@@ -4,13 +4,15 @@
 
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/copilot-cli:1": {}
   },
 
   // One volume per container: logins survive rebuilds but are not shared with other devcontainers.
   "mounts": [
     "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
     "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume",
+    "source=copilot-config-${devcontainerId},target=/home/node/.copilot,type=volume",
     "source=gh-config-${devcontainerId},target=/home/node/.config/gh,type=volume"
   ],
 
